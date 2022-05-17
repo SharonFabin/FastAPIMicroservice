@@ -1,0 +1,12 @@
+.vscode
+testing-project
+.mypy_cache
+poetry.lock
+dev-link/
+__pycache__
+app.db
+.pytest_cache
+.vscode/
+venv/
+packages*/
+*.log

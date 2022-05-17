@@ -1,0 +1,16 @@
+{
+    "project_name": "Base Project",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+
+
+    "postgres_password": "changethis",
+    "pgadmin_default_user": "{{cookiecutter.first_superuser}}",
+    "pgadmin_default_user_password": "{{cookiecutter.first_superuser_password}}",
+
+    "_copy_without_render": [
+        "frontend/src/**/*.html",
+        "frontend/src/**/*.vue",
+        "frontend/node_modules/*",
+        "backend/app/app/email-templates/**"
+    ]
+}
