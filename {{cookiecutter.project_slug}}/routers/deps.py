@@ -13,7 +13,7 @@ from services.messaging import MessageProducer, RabbitMQProducer
 service_example = ServiceExample()
 def get_service_example() -> ServiceInterface:
     return service_example
-{%- endif +%}
+{%+ endif +%}
 
 {%+ if cookiecutter.messaging_technology == "Kafka" %}
 message_producer = KafkaMessageProducer()
