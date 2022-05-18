@@ -1,6 +1,6 @@
 import logging
 from fastapi import APIRouter, FastAPI
-{% if cookiecutter.service_pattern_template == 'True'}
+{% if cookiecutter.service_pattern_template == 'True' %}
 from routers import service_router
 {% endif %}
 import routers.deps
