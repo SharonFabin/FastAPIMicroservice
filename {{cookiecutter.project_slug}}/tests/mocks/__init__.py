@@ -7,6 +7,6 @@ from .kafka_client import KafkaClient
 from .rabbitmq_client import RabbitMQClient
 {%+ endif +%}
 {%- if cookiecutter.service_pattern_template == 'True' %}
-# from .service_mock import ServiceMock
+from .service_mock import ServiceMock
 {%+ endif +%}
 
