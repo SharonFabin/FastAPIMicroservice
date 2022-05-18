@@ -4,9 +4,7 @@ from services.service_example import ServiceInterface, ServiceExample
 
 {%- if cookiecutter.messaging_technology == 'Kafka' -%}
 from services.messaging import MessageProducer, KafkaMessageProducer
-{%- endif +%}
-
-{%- if cookiecutter.messaging_technology == 'RabbitMQ' -%}
+{%- elif cookiecutter.messaging_technology == 'RabbitMQ' -%}
 from services.messaging import MessageProducer, RabbitMQProducer
 {%- endif +%}
 
@@ -19,8 +17,6 @@ def get_service_example() -> ServiceInterface:
 
 {%+ if cookiecutter.messaging_technology == "Kafka" -%}
 message_producer = KafkaMessageProducer()
-{%- endif +%}
-
 {%+ elif cookiecutter.messagin_technology == "RabbitMQ" -%}
 message_producer = RabbitMQProducer()
 {%- endif +%}
