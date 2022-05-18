@@ -1,10 +1,10 @@
 {%+ if cookiecutter.service_pattern_template == True +%}
 from services.service_example import ServiceInterface, ServiceExample
 {%+ endif +%}
-{%+ if cookiecutter.message_technology == 'Kafka' +%}
+{%+ if cookiecutter.messaging_technology == 'Kafka' +%}
 from services.messaging import MessageProducer, KafkaMessageProducer
 {%+ endif +%}
-{%+ if cookiecutter.message_technology == 'RabbitMQ' +%}
+{%+ if cookiecutter.messaging_technology == 'RabbitMQ' +%}
 from services.messaging import MessageProducer, RabbitMQProducer
 {%+ endif +%}
 
