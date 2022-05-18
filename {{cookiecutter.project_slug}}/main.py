@@ -1,6 +1,8 @@
 import logging
 from fastapi import APIRouter, FastAPI
+{% if cookiecutter.service_pattern_template == 'True'}
 from routers import service_router
+{% endif %}
 import routers.deps
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -26,7 +28,7 @@ app = FastAPI()
 async def root():
     return {"info": "OK"}
 
-api_routers = [service_router]
+api_routers = [{% if cookiecutter.service_pattern_template == 'True' %}service_router{% endif %}]
 
 for router in api_routers:
     app.include_router(router)

@@ -3,19 +3,29 @@ import os
 import shutil
 
 
-# path: Path
-# for path in Path(".").glob("**/*.sh"):
-#     data = path.read_bytes()
-#     lf_data = data.replace(b"\r\n", b"\n")
-#     path.write_bytes(lf_data)
+for path in Path(".").glob("**/*.sh"):
+    data = path.read_bytes()
+    lf_data = data.replace(b"\r\n", b"\n")
+    path.write_bytes(lf_data)
 
 REMOVE_PATHS = [
     '{% if cookiecutter.messaging_technology != "Kafka" %} services/messaging/kafka_message_producer.py {% endif %}',
     '{% if cookiecutter.messaging_technology != "RabbitMQ" %} services/messaging/rabbitmq_message_producer.py {% endif %}',
-    '{% if cookiecutter.using_websocket != 'True' %} utils/__init__.py {% endif %}',
-    '{% if cookiecutter.service_pattern_template != 'True' %} services/service_example {% endif %}',
-    '{% if cookiecutter.service_pattern_template != 'True' %} schemes/service.py {% endif %}',
-    '{% if cookiecutter.service_pattern_template != 'True' %} routers/service.py {% endif %}',
+
+    '{% if cookiecutter.using_websocket != "True" %} utils/kafka_to_websocket.py {% endif %}',
+
+    '{% if cookiecutter.service_pattern_template != "True" %} services/service_example {% endif %}',
+    '{% if cookiecutter.service_pattern_template != "True" %} schemes/service.py {% endif %}',
+    '{% if cookiecutter.service_pattern_template != "True" %} routers/service.py {% endif %}',
+    '{% if cookiecutter.service_pattern_template != "True" %} tests/service {% endif %}',
+    '{% if cookiecutter.service_pattern_template != "True" %} tests/mocks/service_mock.py {% endif %}',
+
+    '{% if cookiecutter.messasing_technology == "Kafka" %} tests/messaging/test_kafka_messaging.py {% endif %}',
+    '{% if cookiecutter.messasing_technology == "Kafka" %} tests/mocks/kafka_client.py {% endif %}',
+    '{% if cookiecutter.messasing_technology == "RabbitMQ" %} tests/messaging/test_rabbitmq_messaging.py {% endif %}',
+    '{% if cookiecutter.messasing_technology == "RabbitMQ" %} tests/mocks/rabbitmq_client.py {% endif %}',
+    '{% if cookiecutter.messasing_technology == "None" %} tests/messaging {% endif %}',
+    '{% if cookiecutter.messasing_technology == "None" %} tests/mocks/message_producer_mock.py {% endif %}',
 ]
 
 for path in REMOVE_PATHS:

@@ -1,6 +1,5 @@
 import logging
 import asyncio
-from kafka import KafkaAdminClient
 from services.messaging import KafkaMessageProducer, kafka_message_producer
 from email.generator import Generator
 from typing import AsyncGenerator
@@ -8,7 +7,7 @@ import pytest
 import pytest_asyncio
 from unittest.mock import AsyncMock
 from services.messaging.message_producer import MessageProducer
-from ..mocks import KafkaClient
+from ..mocks.kafka_client import KafkaClient
 
 HOST_IP = 'localhost:9092'
 TOPIC = 'quickstart'
