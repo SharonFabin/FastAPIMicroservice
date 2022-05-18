@@ -6,7 +6,7 @@ from services.service_example import ServiceInterface, ServiceExample
 from services.messaging import MessageProducer, KafkaMessageProducer
 {%- elif cookiecutter.messaging_technology == 'RabbitMQ' %}
 from services.messaging import MessageProducer, RabbitMQProducer
-{%- endif -%}
+{%+ endif +%}
 
 
 {%+ if cookiecutter.service_pattern_template == 'True' %}
