@@ -20,10 +20,13 @@ REMOVE_PATHS = [
     '{% if cookiecutter.service_pattern_template != "True" %} tests/service {% endif %}',
     '{% if cookiecutter.service_pattern_template != "True" %} tests/mocks/service_mock.py {% endif %}',
 
-    '{% if cookiecutter.messaging_technology == "Kafka" %} tests/messaging/test_kafka_messaging.py {% endif %}',
-    '{% if cookiecutter.messaging_technology == "Kafka" %} tests/mocks/kafka_client.py {% endif %}',
-    '{% if cookiecutter.messaging_technology == "RabbitMQ" %} tests/messaging/test_rabbitmq_messaging.py {% endif %}',
-    '{% if cookiecutter.messaging_technology == "RabbitMQ" %} tests/mocks/rabbitmq_client.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "Kafka" %} services/messaging/kafka_message_producer.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "Kafka" %} tests/messaging/test_kafka_messaging.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "Kafka" %} tests/mocks/kafka_client.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "RabbitMQ" %} services/messaging/rabbitmq_producer.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "RabbitMQ" %} tests/messaging/test_rabbitmq_messaging.py {% endif %}',
+    '{% if cookiecutter.messaging_technology != "RabbitMQ" %} tests/mocks/rabbitmq_client.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "None" %} services/messaging {% endif %}',
     '{% if cookiecutter.messaging_technology == "None" %} tests/messaging {% endif %}',
     '{% if cookiecutter.messaging_technology == "None" %} tests/mocks/message_producer_mock.py {% endif %}',
 

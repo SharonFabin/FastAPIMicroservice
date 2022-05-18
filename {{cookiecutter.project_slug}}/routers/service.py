@@ -11,9 +11,6 @@ service_router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-# spectrum_service = SpectrumService()
-
-
 @service_router.post("/example/")
 async def config_spectrum(config: ServiceScheme):
     return {"info": "OK"}
@@ -23,8 +20,7 @@ async def config_spectrum(config: ServiceScheme):
 async def start_stream(response: Response,
                        config: ServiceScheme,
                        service: ServiceInterface = Depends(
-                           deps.get_service_example),
-                       message_broker: deps.MessageProducer = Depends(deps.get_message_producer)):
+                           deps.get_service_example)):
     await service.configure(config)
     response.status_code = status.HTTP_200_OK
     return {"info": "OK"}

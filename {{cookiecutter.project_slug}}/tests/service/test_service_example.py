@@ -5,9 +5,6 @@ import pytest_asyncio
 from unittest.mock import AsyncMock
 from schemas.service import ServiceScheme
 from services.service_example import ServiceExample, ServiceInterface
-from tests.mocks.message_producer_mock import MessageProducerMock
-
-message_broker_mock = AsyncMock(MessageProducerMock)
 
 
 @pytest_asyncio.fixture()
