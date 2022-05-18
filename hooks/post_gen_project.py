@@ -13,6 +13,7 @@ REMOVE_PATHS = [
     '{% if cookiecutter.messaging_technology != "Kafka" %} services/messaging/kafka_message_producer.py {% endif %}',
     '{% if cookiecutter.messaging_technology != "RabbitMQ" %} services/messaging/rabbitmq_message_producer.py {% endif %}',
     '{% if cookiecutter.using_websocket != true %} utils/__init__.py {% endif %}',
+    '{% if cookiecutter.service_pattern_template != true %} services/service_example {% endif %}',
 ]
 
 for path in REMOVE_PATHS:
