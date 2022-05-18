@@ -17,7 +17,7 @@ def get_service_example() -> ServiceInterface:
 
 {%+ if cookiecutter.messaging_technology == "Kafka" -%}
 message_producer = KafkaMessageProducer()
-{%+ elif cookiecutter.messagin_technology == "RabbitMQ" -%}
+{%+ elif cookiecutter.messaging_technology == "RabbitMQ" -%}
 message_producer = RabbitMQProducer()
 {%- endif +%}
 
