@@ -1,4 +1,4 @@
-{%- if cookiecutter.service_pattern_template == true -%}
+{%- if cookiecutter.service_pattern_template == 'True' -%}
 from services.service_example import ServiceInterface, ServiceExample
 {%- endif -%}
 
@@ -9,7 +9,7 @@ from services.messaging import MessageProducer, RabbitMQProducer
 {%- endif -%}
 
 
-{%+ if cookiecutter.service_pattern_template == true -%}
+{%+ if cookiecutter.service_pattern_template == 'True' -%}
 service_example = ServiceExample()
 def get_service_example() -> ServiceInterface:
     return service_example
