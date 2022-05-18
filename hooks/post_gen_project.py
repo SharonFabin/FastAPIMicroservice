@@ -20,12 +20,15 @@ REMOVE_PATHS = [
     '{% if cookiecutter.service_pattern_template != "True" %} tests/service {% endif %}',
     '{% if cookiecutter.service_pattern_template != "True" %} tests/mocks/service_mock.py {% endif %}',
 
-    '{% if cookiecutter.messasing_technology == "Kafka" %} tests/messaging/test_kafka_messaging.py {% endif %}',
-    '{% if cookiecutter.messasing_technology == "Kafka" %} tests/mocks/kafka_client.py {% endif %}',
-    '{% if cookiecutter.messasing_technology == "RabbitMQ" %} tests/messaging/test_rabbitmq_messaging.py {% endif %}',
-    '{% if cookiecutter.messasing_technology == "RabbitMQ" %} tests/mocks/rabbitmq_client.py {% endif %}',
-    '{% if cookiecutter.messasing_technology == "None" %} tests/messaging {% endif %}',
-    '{% if cookiecutter.messasing_technology == "None" %} tests/mocks/message_producer_mock.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "Kafka" %} tests/messaging/test_kafka_messaging.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "Kafka" %} tests/mocks/kafka_client.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "RabbitMQ" %} tests/messaging/test_rabbitmq_messaging.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "RabbitMQ" %} tests/mocks/rabbitmq_client.py {% endif %}',
+    '{% if cookiecutter.messaging_technology == "None" %} tests/messaging {% endif %}',
+    '{% if cookiecutter.messaging_technology == "None" %} tests/mocks/message_producer_mock.py {% endif %}',
+
+    # TODO: handle app tests 
+    'tests/app'
 ]
 
 for path in REMOVE_PATHS:
