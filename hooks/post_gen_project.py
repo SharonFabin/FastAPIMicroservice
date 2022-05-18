@@ -14,6 +14,8 @@ REMOVE_PATHS = [
     '{% if cookiecutter.messaging_technology != "RabbitMQ" %} services/messaging/rabbitmq_message_producer.py {% endif %}',
     '{% if cookiecutter.using_websocket != true %} utils/__init__.py {% endif %}',
     '{% if cookiecutter.service_pattern_template != true %} services/service_example {% endif %}',
+    '{% if cookiecutter.service_pattern_template != true %} schemes/service.py {% endif %}',
+    '{% if cookiecutter.service_pattern_template != true %} routers/service.py {% endif %}',
 ]
 
 for path in REMOVE_PATHS:
