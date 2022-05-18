@@ -1,4 +1,4 @@
-{%- if cookiecutter.service_pattern_template == 'True' -%}
+{%- if cookiecutter.service_pattern_template == 'True' %}
 from services.service_example import ServiceInterface, ServiceExample
 {%- endif -%}
 
