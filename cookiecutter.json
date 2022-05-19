@@ -5,6 +5,7 @@
     "messaging_technology": ["None", "Kafka", "RabbitMQ"],
     "using_websocket": [true, false],
     "service_pattern_template": [true, false],
+    "openapi_path": "",
 
     "_copy_without_render": [
         "backend/app/app/email-templates/**"
