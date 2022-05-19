@@ -41,3 +41,7 @@ for path in REMOVE_PATHS:
             shutil.rmtree(path)
         else:
             os.unlink(path)
+
+
+current_directory = os.getcwd()
+shutil.rmtree(f'{current_directory}/out/tests/conftest.py')
