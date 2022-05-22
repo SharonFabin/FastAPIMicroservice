@@ -60,3 +60,11 @@ if({{cookiecutter.openapi_path!=""}}):
 
     # Copy generated main
     shutil.move(Path(f'{src_path}/src/openapi_server/main.py'), Path(f'{trg_path}/openapi_main.py'))
+
+    # Copy docker components
+    shutil.move(Path(f'{src_path}/docker-compose.yaml'), Path(f'{trg_path}/docker-compose.yaml'))
+    shutil.move(Path(f'{src_path}/Dockerfile'), Path(f'{trg_path}/Dockerfile'))
+
+    #Delete unnecessary files
+    shutil.rmtree(Path(src_path))
+
