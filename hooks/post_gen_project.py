@@ -44,5 +44,6 @@ for path in REMOVE_PATHS:
 
 
 current_directory = os.getcwd()
-os.remove(f'{current_directory}/out/tests/conftest.py')
+# os.remove(f'{current_directory}/out/tests/conftest.py')
+shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
 # shutil.rmtree(f'{current_directory}/out/tests/conftest.py')
