@@ -15,3 +15,4 @@ Setup options:
 - MessageQueue technology
 - Add Websocket features
 - Generate Service-Pattern template
+- Use an OpenAPI spec file to auto generate routes and models
