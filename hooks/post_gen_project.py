@@ -47,9 +47,16 @@ if({{cookiecutter.openapi_path!=""}}):
     current_directory = os.getcwd()
     shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
 
-    src_path = f'{current_directory}/out/tests'
-    trg_path = f'{current_directory}/tests/api'
+    src_path = f'{current_directory}/out'
+    trg_path = f'{current_directory}'
 
     # Copy API tests to tests folder
-    for src_file in Path(src_path).glob('test_*.py'):
-        shutil.move(src_file, os.path.join(trg_path,os.path.basename(src_file)))
+    for src_file in Path(f'{src_path}/tests').glob('test_*.py'):
+        shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
+
+    # Copy models and schemas
+    for src_file in Path(f'{src_path}/src/openapi_server/models').glob('*.py'):
+        shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
+
+    # Copy generated main
+    shutil.move(Path(f'{src_path}/src/openapi_server/main.py'), Path(f'{trg_path}/openapi_main.py'))
