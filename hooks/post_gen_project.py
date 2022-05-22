@@ -55,14 +55,17 @@ if({{cookiecutter.openapi_path!=""}}):
     main_path = 'src/openapi_server/main.py'
 
     # Copy API tests to tests folder
+    # TODO: correct path names (openapi_server to correct path name)
     for src_file in Path(f'{src_path}/{tests_path}').glob('test_*.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
 
     # Copy models and schemas
+    # TODO: correct path names (openapi_server to correct path name)
     for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
     
     # Copy routes
+    # TODO: correct path names (openapi_server to correct path name)
     for src_file in Path(f'{src_path}/{routes_path}').glob('*_api.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/routers',os.path.basename(src_file)))
 
@@ -74,5 +77,5 @@ if({{cookiecutter.openapi_path!=""}}):
     shutil.move(Path(f'{src_path}/Dockerfile'), Path(f'{trg_path}/Dockerfile'))
 
     #Delete unnecessary files
-    # shutil.rmtree(Path(src_path))
+    shutil.rmtree(Path(src_path))
 
