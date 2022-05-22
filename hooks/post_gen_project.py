@@ -42,8 +42,12 @@ for path in REMOVE_PATHS:
         else:
             os.unlink(path)
 
+if({{cookiecutter.openapi_path!=""}}):
+    current_directory = os.getcwd()
+    shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
 
-current_directory = os.getcwd()
-# os.remove(f'{current_directory}/out/tests/conftest.py')
-shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
-# shutil.rmtree(f'{current_directory}/out/tests/conftest.py')
+    src_path = f'{current_directory}/out/tests'
+    trg_path = f'{current_directory}/tests/api'
+
+    for src_file in Path(src_path).glob('test_*.py'):
+        shutil.copy(src_file, trg_path)
