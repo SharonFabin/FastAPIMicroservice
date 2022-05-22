@@ -66,5 +66,5 @@ if({{cookiecutter.openapi_path!=""}}):
     shutil.move(Path(f'{src_path}/Dockerfile'), Path(f'{trg_path}/Dockerfile'))
 
     #Delete unnecessary files
-    shutil.rmtree(Path(src_path))
+    # shutil.rmtree(Path(src_path))
 
