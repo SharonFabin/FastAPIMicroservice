@@ -49,17 +49,25 @@ if({{cookiecutter.openapi_path!=""}}):
 
     src_path = f'{current_directory}/out'
     trg_path = f'{current_directory}'
+    tests_path = 'tests'
+    models_path = 'src/openapi_server/models'
+    routes_path = 'src/openapi_server/api'
+    main_path = 'src/openapi_server/main.py'
 
     # Copy API tests to tests folder
-    for src_file in Path(f'{src_path}/tests').glob('test_*.py'):
+    for src_file in Path(f'{src_path}/{tests_path}').glob('test_*.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
 
     # Copy models and schemas
-    for src_file in Path(f'{src_path}/src/openapi_server/models').glob('*.py'):
+    for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
+    
+    # Copy routes
+    for src_file in Path(f'{src_path}/{routes_path}').glob('*_api.py'):
+        shutil.move(src_file, os.path.join(f'{trg_path}/routers',os.path.basename(src_file)))
 
     # Copy generated main
-    shutil.move(Path(f'{src_path}/src/openapi_server/main.py'), Path(f'{trg_path}/openapi_main.py'))
+    shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
 
     # Copy docker components
     shutil.move(Path(f'{src_path}/docker-compose.yaml'), Path(f'{trg_path}/docker-compose.yaml'))
