@@ -46,8 +46,8 @@ if({{cookiecutter.openapi_path!=""}}):
     current_directory = os.getcwd()
     shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
 
-    src_path = f'{current_directory}/out/tests'
-    trg_path = f'{current_directory}/tests/api'
+    src_path = f'{current_directory}/out/tests/'
+    trg_path = f'{current_directory}/tests/api/'
 
     for src_file in Path(src_path).glob('test_*.py'):
         shutil.copy(src_file, trg_path)
