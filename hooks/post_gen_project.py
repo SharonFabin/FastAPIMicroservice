@@ -43,11 +43,13 @@ for path in REMOVE_PATHS:
             os.unlink(path)
 
 if({{cookiecutter.openapi_path!=""}}):
+    # Copy conftest to project root
     current_directory = os.getcwd()
     shutil.move(f'{current_directory}/out/tests/conftest.py', f'{current_directory}/conftest.py')
 
     src_path = f'{current_directory}/out/tests'
     trg_path = f'{current_directory}/tests/api'
-#
-    # for src_file in Path(src_path).glob('test_*.py'):
-    #     shutil.move(os.path.join(src_path,src_file), trg_path)
+
+    # Copy API tests to tests folder
+    for src_file in Path(src_path).glob('test_*.py'):
+        shutil.move(src_file, os.path.join(trg_path,os.path.basename(src_file)))
