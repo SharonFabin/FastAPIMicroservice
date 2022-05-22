@@ -51,7 +51,7 @@ if({{cookiecutter.openapi_path!=""}}):
     trg_path = f'{current_directory}'
     tests_path = 'tests'
     models_path = 'src/openapi_server/models'
-    routes_path = 'src/openapi_server/api'
+    routes_path = 'src/openapi_server/apis'
     main_path = 'src/openapi_server/main.py'
 
     # Copy API tests to tests folder

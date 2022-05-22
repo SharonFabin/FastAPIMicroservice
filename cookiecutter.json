@@ -8,7 +8,6 @@
     "openapi_path": "",
 
     "_copy_without_render": [
-        "out",
         "backend/app/app/email-templates/**"
     ]
 }
