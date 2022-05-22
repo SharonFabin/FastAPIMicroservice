@@ -48,6 +48,6 @@ if({{cookiecutter.openapi_path!=""}}):
 
     src_path = f'{current_directory}/out/tests'
     trg_path = f'{current_directory}/tests/api'
-
+#
     for src_file in Path(src_path).glob('test_*.py'):
         shutil.copy(os.path.join(src_path,src_file), trg_path)
