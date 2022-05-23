@@ -67,14 +67,17 @@ def handle_misc(src_path, trg_path):
     main_path = 'src/openapi_server/main.py'
     auth_path = 'src/openapi_server/security_api.py'
     shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
-    shutil.move(Path(f'{src_path}/{auth_path}'), Path(f'{trg_path}/auth.py'))
+    shutil.move(Path(f'{src_path}/{auth_path}'), Path(f'{trg_path}/auth/auth.py'))
 
 def findReplace(directory, find, replace, filePattern):
     for path, dirs, files in os.walk(os.path.abspath(directory)):
         for filename in fnmatch.filter(files, filePattern):
             filepath = os.path.join(path, filename)
-            with open(filepath, 'r+') as f:
-                f.write(f.read().replace(find, replace))
+            with open(filepath) as f:
+                s = f.read()
+            s = s.replace(find, replace)
+            with open(filepath, "w") as f:
+                f.write(s)
 
 def clean_files(src_path, trg_path):
     shutil.rmtree(Path(src_path))
