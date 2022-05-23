@@ -67,7 +67,7 @@ def handle_misc(src_path, trg_path):
     main_path = 'src/openapi_server/main.py'
     auth_path = 'src/openapi_server/security_api.py'
     shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
-    shutil.move(Path(f'{src_path}/{auth_path}'), Path(f'{trg_path}/auth/auth.py'))
+    shutil.move(Path(f'{src_path}/{auth_path}'), Path(f'{trg_path}/auth.py'))
 
 def findReplace(directory, find, replace, filePattern):
     for path, dirs, files in os.walk(os.path.abspath(directory)):
@@ -94,7 +94,7 @@ if({{cookiecutter.openapi_path!=""}}):
     # TODO: correct path names for imports (openapi_server to correct path name)
 
     findReplace(src_path, 'openapi_server.', '', '*.*')
-    findReplace(src_path, 'security_api import', 'auth.security_api import', '*.py')
+    findReplace(src_path, 'security_api import', 'auth import', '*.py')
 
     handle_tests(src_path, trg_path)
     handle_models(src_path, trg_path)
