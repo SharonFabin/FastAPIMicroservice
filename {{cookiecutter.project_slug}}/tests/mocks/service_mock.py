@@ -1,6 +1,5 @@
 from schemas.service import ServiceScheme
 from services.service_example.service_interface import ServiceInterface
-from services.messaging import MessageProducer
 
 
 class ServiceMock(ServiceInterface):
