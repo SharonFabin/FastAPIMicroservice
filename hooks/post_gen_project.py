@@ -97,6 +97,6 @@ if({{cookiecutter.openapi_path!=""}}):
     handle_routes(src_path, trg_path)
     handle_docker(src_path, trg_path)
     handle_misc(src_path, trg_path)
-    clean_files(src_path, trg_path)
+    # clean_files(src_path, trg_path)
 
 
