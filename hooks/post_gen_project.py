@@ -42,6 +42,15 @@ for path in REMOVE_PATHS:
         else:
             os.unlink(path)
 
+def handle_tests(src_path, trg_path):
+    tests_path = 'tests'
+    for src_file in Path(f'{src_path}/{tests_path}').glob('test_*.py'):
+        with open(src_file, 'rw') as file:
+            file.write(file.read().replace("openapi","meow"))
+        shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
+
+
+
 if({{cookiecutter.openapi_path!=""}}):
     # Copy conftest to project root
     current_directory = os.getcwd()
@@ -49,15 +58,13 @@ if({{cookiecutter.openapi_path!=""}}):
 
     src_path = f'{current_directory}/out'
     trg_path = f'{current_directory}'
-    tests_path = 'tests'
     models_path = 'src/openapi_server/models'
     routes_path = 'src/openapi_server/apis'
     main_path = 'src/openapi_server/main.py'
 
     # Copy API tests to tests folder
     # TODO: correct path names (openapi_server to correct path name)
-    for src_file in Path(f'{src_path}/{tests_path}').glob('test_*.py'):
-        shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
+    handle_tests(src_path, trg_path)
 
     # Copy models and schemas
     # TODO: correct path names (openapi_server to correct path name)
