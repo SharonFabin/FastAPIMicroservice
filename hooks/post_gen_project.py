@@ -51,7 +51,7 @@ def handle_tests(src_path, trg_path):
 
 def handle_models(src_path, trg_path):
     models_path = 'src/openapi_server/models'
-    for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
+    for src_file in Path(f'{src_path}/{models_path}').glob('*.*'):
         shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
 
 def handle_routes(src_path, trg_path):
