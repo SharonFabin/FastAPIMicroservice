@@ -46,7 +46,7 @@ def handle_tests(src_path, trg_path):
     tests_path = 'tests'
     for src_file in Path(f'{src_path}/{tests_path}').glob('test_*.py'):
         with open(src_file, 'r+') as file:
-            file.write(file.read().replace("openapi","meow"))
+            file.write(file.read().replace("openapi_server.",""))
         shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
 
 
