@@ -51,7 +51,7 @@ def handle_tests(src_path, trg_path):
 
 def handle_models(src_path, trg_path):
     models_path = 'src/openapi_server/models'
-    for src_file in Path(f'{src_path}/{models_path}').glob('*.*'):
+    for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
         shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
 
 def handle_routes(src_path, trg_path):
@@ -65,17 +65,16 @@ def handle_docker(src_path, trg_path):
 
 def handle_misc(src_path, trg_path):
     main_path = 'src/openapi_server/main.py'
+    auth_path = 'src/openapi_server/security_api.py'
     shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
+    shutil.move(Path(f'{src_path}/{auth_path}'), Path(f'{trg_path}/auth.py'))
 
 def findReplace(directory, find, replace, filePattern):
     for path, dirs, files in os.walk(os.path.abspath(directory)):
         for filename in fnmatch.filter(files, filePattern):
             filepath = os.path.join(path, filename)
-            with open(filepath) as f:
-                s = f.read()
-            s = s.replace(find, replace)
-            with open(filepath, "w") as f:
-                f.write(s)
+            with open(filepath, 'r+') as f:
+                f.write(f.read().replace(find, replace))
 
 def clean_files(src_path, trg_path):
     shutil.rmtree(Path(src_path))
@@ -92,6 +91,8 @@ if({{cookiecutter.openapi_path!=""}}):
     # TODO: correct path names for imports (openapi_server to correct path name)
 
     findReplace(src_path, 'openapi_server.', '', '*.*')
+    findReplace(src_path, 'security_api import', 'auth.security_api import', '*.py')
+
     handle_tests(src_path, trg_path)
     handle_models(src_path, trg_path)
     handle_routes(src_path, trg_path)
