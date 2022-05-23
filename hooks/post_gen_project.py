@@ -1,5 +1,5 @@
 from pathlib import Path
-import os
+import os, fnmatch
 import shutil
 
 
@@ -49,6 +49,36 @@ def handle_tests(src_path, trg_path):
             file.write(file.read().replace("openapi_server.",""))
         shutil.move(src_file, os.path.join(f'{trg_path}/tests/api',os.path.basename(src_file)))
 
+def handle_models(src_path, trg_path):
+    models_path = 'src/openapi_server/models'
+    for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
+        shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
+
+def handle_routes(src_path, trg_path):
+    routes_path = 'src/openapi_server/apis'
+    for src_file in Path(f'{src_path}/{routes_path}').glob('*_api.py'):
+        shutil.move(src_file, os.path.join(f'{trg_path}/routers',os.path.basename(src_file)))
+
+def handle_docker(src_path, trg_path):
+    shutil.move(Path(f'{src_path}/docker-compose.yaml'), Path(f'{trg_path}/docker-compose.yaml'))
+    shutil.move(Path(f'{src_path}/Dockerfile'), Path(f'{trg_path}/Dockerfile'))
+
+def handle_misc(src_path, trg_path):
+    main_path = 'src/openapi_server/main.py'
+    shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
+
+def findReplace(directory, find, replace, filePattern):
+    for path, dirs, files in os.walk(os.path.abspath(directory)):
+        for filename in fnmatch.filter(files, filePattern):
+            filepath = os.path.join(path, filename)
+            with open(filepath) as f:
+                s = f.read()
+            s = s.replace(find, replace)
+            with open(filepath, "w") as f:
+                f.write(s)
+
+def clean_files(src_path, trg_path):
+    shutil.rmtree(Path(src_path))
 
 
 if({{cookiecutter.openapi_path!=""}}):
@@ -58,31 +88,15 @@ if({{cookiecutter.openapi_path!=""}}):
 
     src_path = f'{current_directory}/out'
     trg_path = f'{current_directory}'
-    models_path = 'src/openapi_server/models'
-    routes_path = 'src/openapi_server/apis'
-    main_path = 'src/openapi_server/main.py'
 
-    # Copy API tests to tests folder
-    # TODO: correct path names (openapi_server to correct path name)
+    # TODO: correct path names for imports (openapi_server to correct path name)
+
+    findReplace(src_path, 'openapi_server.', '', '*.*')
     handle_tests(src_path, trg_path)
+    handle_models(src_path, trg_path)
+    handle_routes(src_path, trg_path)
+    handle_docker(src_path, trg_path)
+    handle_misc(src_path, trg_path)
+    clean_files(src_path, trg_path)
 
-    # Copy models and schemas
-    # TODO: correct path names (openapi_server to correct path name)
-    for src_file in Path(f'{src_path}/{models_path}').glob('*.py'):
-        shutil.move(src_file, os.path.join(f'{trg_path}/models',os.path.basename(src_file)))
-    
-    # Copy routes
-    # TODO: correct path names (openapi_server to correct path name)
-    for src_file in Path(f'{src_path}/{routes_path}').glob('*_api.py'):
-        shutil.move(src_file, os.path.join(f'{trg_path}/routers',os.path.basename(src_file)))
-
-    # Copy generated main
-    shutil.move(Path(f'{src_path}/{main_path}'), Path(f'{trg_path}/openapi_main.py'))
-
-    # Copy docker components
-    shutil.move(Path(f'{src_path}/docker-compose.yaml'), Path(f'{trg_path}/docker-compose.yaml'))
-    shutil.move(Path(f'{src_path}/Dockerfile'), Path(f'{trg_path}/Dockerfile'))
-
-    #Delete unnecessary files
-    shutil.rmtree(Path(src_path))
 
